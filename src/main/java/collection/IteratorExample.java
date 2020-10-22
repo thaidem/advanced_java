@@ -13,6 +13,12 @@ public class IteratorExample {
     arrayList1.add("Elena");
 
     Iterator<String> iterator = arrayList1.iterator();
+    while (iterator.hasNext()) {
+//      System.out.println(iterator.next());
+      iterator.next();
+      iterator.remove();
+    }
+    System.out.println(arrayList1);
 
   }
 }
