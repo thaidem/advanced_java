@@ -1,40 +1,18 @@
 package lambda;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class StudentInfo {
 
   void testStudents(ArrayList<Student> al, StudentsChecks sc) {
-    for(Student s: al) {
-      if(sc.check(s)) {
+    for (Student s : al) {
+      if (sc.check(s)) {
         System.out.println(s);
       }
     }
   }
-
-//  void printStudentsOverGrade(ArrayList<Student> al, double grade) {
-//    for (Student s: al) {
-//      if(s.averageGrade > grade) {
-//        System.out.println(s);
-//      }
-//    }
-//  }
-//
-//  void printStudentsUnderAge(ArrayList<Student> al, int age) {
-//    for (Student s: al) {
-//      if(s.age < age) {
-//        System.out.println(s);
-//      }
-//    }
-//  }
-//
-//  void printStudentsMixCondition(ArrayList<Student> al, int age, double grade, char sex) {
-//    for (Student s: al) {
-//      if(s.age > age && s.averageGrade < grade && s.sex == sex) {
-//        System.out.println(s);
-//      }
-//    }
-//  }
 }
 
 class Test {
@@ -52,30 +30,30 @@ class Test {
     students.add(st5);
 
     StudentInfo studentInfo = new StudentInfo();
-//    studentInfo.testStudents(students, new CheckOverGrade());
-//    System.out.println("----------------");
-//    studentInfo.testStudents(students, new StudentsChecks() {
+//    Collections.sort(students, new Comparator<Student>() {
 //      @Override
-//      public boolean check(Student s) {
-//        return s.age < 30;
+//      public int compare(Student s1, Student s2) {
+//        return s1.course - s2.course;
 //      }
 //    });
-    studentInfo.testStudents(students, (Student s) -> {
-      return s.averageGrade > 8;
-    });
-    System.out.println("----------------");
-    studentInfo.testStudents(students, (Student s) -> {
-      return s.age < 30;
-    });
-    System.out.println("----------------");
-    studentInfo.testStudents(students, (Student s) -> {
-      return s.age > 20 && s.averageGrade < 9.5 && s.sex == 'f';
-    });
-//    studentInfo.printStudentsOverGrade(students, 8);
+    Collections.sort(students, (s1, s2) -> s1.course - s2.course );
+    System.out.println(students);
+
+//    studentInfo.testStudents(students, (Student s) -> { return s.averageGrade > 8; });
+//    studentInfo.testStudents(students, s -> s.averageGrade > 8);
+//
+//    StudentsChecks sc = (Student s) -> { return s.averageGrade > 8; };
+//    studentInfo.testStudents(students, sc);
+//
+//
 //    System.out.println("----------------");
-//    studentInfo.printStudentsUnderAge(students, 30);
+//    studentInfo.testStudents(students, (Student s) -> {
+//      return s.age < 30;
+//    });
 //    System.out.println("----------------");
-//    studentInfo.printStudentsMixCondition(students, 20, 9.5, 'f');
+//    studentInfo.testStudents(students, (Student s) -> {
+//      return s.age > 20 && s.averageGrade < 9.5 && s.sex == 'f';
+//    });
   }
 }
 
