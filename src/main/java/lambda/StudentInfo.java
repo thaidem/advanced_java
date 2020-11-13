@@ -3,12 +3,13 @@ package lambda;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 public class StudentInfo {
 
-  void testStudents(ArrayList<Student> al, StudentsChecks sc) {
+  void testStudents(ArrayList<Student> al, Predicate<Student> pr) {
     for (Student s : al) {
-      if (sc.check(s)) {
+      if (pr.test(s)) {
         System.out.println(s);
       }
     }
@@ -36,33 +37,38 @@ class Test {
 //        return s1.course - s2.course;
 //      }
 //    });
-    Collections.sort(students, (s1, s2) -> s1.course - s2.course );
-    System.out.println(students);
 
-//    studentInfo.testStudents(students, (Student s) -> { return s.averageGrade > 8; });
-//    studentInfo.testStudents(students, s -> s.averageGrade > 8);
-//
-//    StudentsChecks sc = (Student s) -> { return s.averageGrade > 8; };
-//    studentInfo.testStudents(students, sc);
-//
-//
-//    System.out.println("----------------");
-//    studentInfo.testStudents(students, (Student s) -> {
-//      return s.age < 30;
-//    });
-//    System.out.println("----------------");
-//    studentInfo.testStudents(students, (Student s) -> {
-//      return s.age > 20 && s.averageGrade < 9.5 && s.sex == 'f';
-//    });
+//    Collections.sort(students, (s1, s2) -> s1.course - s2.course );
+//    System.out.println(students);
+
+    studentInfo.testStudents(students, (Student s) -> {
+      return s.averageGrade > 8;
+    });
+
+    studentInfo.testStudents(students, s -> s.averageGrade > 8);
+
+    Predicate<Student> st = s -> s.averageGrade > 7.5;
+    studentInfo.testStudents(students, st);
+
+
+    System.out.println("----------------");
+    studentInfo.testStudents(students, (Student s) -> {
+      return s.age < 30;
+    });
+    System.out.println("----------------");
+    studentInfo.testStudents(students, (Student s) -> {
+      return s.age > 20 && s.averageGrade < 9.5 && s.sex == 'f';
+    });
   }
 }
 
-interface StudentsChecks {
-  boolean check(Student s);
-}
-class CheckOverGrade implements StudentsChecks {
-  @Override
-  public boolean check(Student s) {
-    return s.averageGrade>8;
-  }
-}
+//interface StudentsChecks {
+//  boolean check(Student s);
+//}
+
+//class CheckOverGrade implements StudentsChecks {
+//  @Override
+//  public boolean check(Student s) {
+//    return s.averageGrade>8;
+//  }
+//}
