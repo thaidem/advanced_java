@@ -3,7 +3,9 @@ package lambda;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.Function;
 
 public class StudentInfo {
 
@@ -30,7 +32,7 @@ class Test {
     students.add(st4);
     students.add(st5);
 
-    StudentInfo studentInfo = new StudentInfo();
+//    StudentInfo studentInfo = new StudentInfo();
 //    Collections.sort(students, new Comparator<Student>() {
 //      @Override
 //      public int compare(Student s1, Student s2) {
@@ -41,24 +43,42 @@ class Test {
 //    Collections.sort(students, (s1, s2) -> s1.course - s2.course );
 //    System.out.println(students);
 
-    studentInfo.testStudents(students, (Student s) -> {
-      return s.averageGrade > 8;
-    });
+//    studentInfo.testStudents(students, (Student s) -> {
+//      return s.averageGrade > 8;
+//    });
+//
+//    studentInfo.testStudents(students, s -> s.averageGrade > 8);
+//
+//    Predicate<Student> st = s -> s.averageGrade > 7.5;
+//    studentInfo.testStudents(students, st);
+//
+//
+//    System.out.println("----------------");
+//    studentInfo.testStudents(students, (Student s) -> {
+//      return s.age < 30;
+//    });
+//    System.out.println("----------------");
+//    studentInfo.testStudents(students, (Student s) -> {
+//      return s.age > 20 && s.averageGrade < 9.5 && s.sex == 'f';
+//    });
 
-    studentInfo.testStudents(students, s -> s.averageGrade > 8);
+    Function<Student, Double> f = student -> student.averageGrade;
+    double res = avgOfSome(students, student -> student.averageGrade);
+    double res1 = avgOfSome(students, student -> (double) student.course);
+    double res2 = avgOfSome(students, student -> (double) student.age);
+    System.out.println(res);
+    System.out.println(res1);
+    System.out.println(res2);
+  }
 
-    Predicate<Student> st = s -> s.averageGrade > 7.5;
-    studentInfo.testStudents(students, st);
+  private static double avgOfSome(List<Student> list, Function<Student, Double> f) {
+    double result = 0;
+    for (Student st : list) {
+      result+= f.apply(st);
+    }
+    result = result/list.size();
+    return result;
 
-
-    System.out.println("----------------");
-    studentInfo.testStudents(students, (Student s) -> {
-      return s.age < 30;
-    });
-    System.out.println("----------------");
-    studentInfo.testStudents(students, (Student s) -> {
-      return s.age > 20 && s.averageGrade < 9.5 && s.sex == 'f';
-    });
   }
 }
 
