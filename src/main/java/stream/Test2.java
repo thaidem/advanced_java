@@ -3,6 +3,7 @@ package stream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Test2 {
   public static void main(String[] args) {
@@ -22,6 +23,8 @@ public class Test2 {
             -> e.getAge() > 22 && e.getAverageGrade() < 7.2)
             .collect(Collectors.toList());
     System.out.println(students);
+
+//    Stream<Student> myStream = new Stream.of(st1, st2, st3, st4, st5);
   }
 }
 
