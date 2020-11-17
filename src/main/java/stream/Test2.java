@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.lang.System.out;
+
 public class Test2 {
   public static void main(String[] args) {
     Student st1 = new Student("Ivan", 'm', 20, 3, 8.7);
@@ -19,9 +21,20 @@ public class Test2 {
     students.add(st4);
     students.add(st5);
 
-    students = students.stream().sorted((x,y) ->
-            x.getName().compareTo(y.getName())).collect(Collectors.toList());
-    System.out.println(students);
+    students.stream().map(e ->
+    {
+      e.setName(e.getName().toUpperCase());
+      return e;
+    })
+            .filter(e -> e.getSex() == 'f')
+            .sorted((x, y) -> x.getAge() - y.getAge())
+            .forEach(e -> out.println(e));
+
+
+
+//    students = students.stream().sorted((x,y) ->
+//            x.getName().compareTo(y.getName())).collect(Collectors.toList());
+//    System.out.println(students);
 
 //    students = students.stream().filter(e
 //            -> e.getAge() > 22 && e.getAverageGrade() < 7.2)
