@@ -2,6 +2,7 @@ package stream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Test9 {
   public static void main(String[] args) {
@@ -17,10 +18,14 @@ public class Test9 {
     students.add(st4);
     students.add(st5);
 
-    Student min  = students.stream().min((x,y) -> x.getCourse()- y.getCourse()).get();
-    System.out.println(min);
+//    Student min  = students.stream().min((x,y) -> x.getCourse()- y.getCourse()).get();
+//    System.out.println(min);
+//
+//    Student max  = students.stream().max((x,y) -> x.getCourse()- y.getCourse()).get();
+//    System.out.println(max);
 
-    Student max  = students.stream().max((x,y) -> x.getCourse()- y.getCourse()).get();
-    System.out.println(max);
+    List<Student> list = students.stream().filter(e -> e.getAge() > 20).limit(3).collect(Collectors.toList());
+    System.out.println(list);
+    students.stream().filter(e -> e.getAverageGrade() < 9).limit(2).forEach(System.out::println);
   }
 }
