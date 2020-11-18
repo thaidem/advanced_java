@@ -21,16 +21,24 @@ public class Test2 {
     students.add(st4);
     students.add(st5);
 
-    students.stream().map(e ->
+//    students.stream().map(e ->
+//    {
+//      e.setName(e.getName().toUpperCase());
+//      return e;
+//    })
+//            .filter(e -> e.getSex() == 'f')
+//            .sorted((x, y) -> x.getAge() - y.getAge())
+//            .forEach(e -> out.println(e));
+
+    Student first = students.stream().map(e ->
     {
       e.setName(e.getName().toUpperCase());
       return e;
     })
             .filter(e -> e.getSex() == 'f')
             .sorted((x, y) -> x.getAge() - y.getAge())
-            .forEach(e -> out.println(e));
-
-
+            .findFirst().get();
+    out.println(first);
 
 //    students = students.stream().sorted((x,y) ->
 //            x.getName().compareTo(y.getName())).collect(Collectors.toList());
