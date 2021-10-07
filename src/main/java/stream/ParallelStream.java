@@ -14,7 +14,7 @@ public class ParallelStream {
 //    double sumResult = list.parallelStream().reduce((a, e) -> a + e).get();
 //    System.out.println(sumResult);
 
-    double divisionResult = list.parallelStream().reduce((a, e) -> a / e).get();
+    double divisionResult = list.parallelStream().reduce((a, e) -> a / e).get(); // Нельзя!
     System.out.println(divisionResult);
   }
 }
